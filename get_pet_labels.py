@@ -17,7 +17,8 @@
 #
 ##
 # Imports python modules
-from os import listdir
+from os import listdir, chdir
+from unittest import result
 
 # TODO 2: Define get_pet_labels function below please be certain to replace None
 #       in the return statement with results_dic dictionary that you create 
@@ -40,6 +41,18 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
+
+    # Change the directory to the folder containing the images
+    chdir(image_dir)
+    # Readable version of the dictionary comp
+    '''
+    for fname_idx in listdir():
+      results_dict[fname_idx] = [" ".join(fname_idx.split("_")[:-1])]
+    '''
+    # Create the output dictionary
+    results_dict = {fname_idx : [" ".join(fname_idx.split("_")[:-1]).lower()]  for fname_idx in listdir()}
+    # Go back to previous directory
+    chdir("..")
     # Replace None with the results_dic dictionary that you created with this
     # function
-    return None
+    return results_dict

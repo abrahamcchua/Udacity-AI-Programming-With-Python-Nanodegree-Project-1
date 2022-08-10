@@ -1,0 +1,5 @@
+08/10/2022
+Finished until part 10 of the project:
+- Added a way to time the program
+- Added the necessary code to allow arguments to be passed from the cli
+- Added a code to get the pet labels
