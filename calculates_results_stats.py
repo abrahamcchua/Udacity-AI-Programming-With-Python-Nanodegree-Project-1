@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/calculates_results_stats.py
 #                                                                             
-# PROGRAMMER:
-# DATE CREATED:                                  
+# PROGRAMMER: Abraham Chua
+# DATE CREATED: 08/11/2022                                 
 # REVISED DATE: 
 # PURPOSE: Create a function calculates_results_stats that calculates the 
 #          statistics of the results of the programrun using the classifier's model 
@@ -67,7 +67,39 @@ def calculates_results_stats(results_dic):
                      and the value is the statistic's value. See comments above
                      and the previous topic Calculating Results in the class for details
                      on how to calculate the counts and statistics.
-    """        
+    """
+    # For refactoring
+#     func_dict = {
+#             (0, 0, 0): ,
+#             (1, 0, 0): ,
+#             (0, 1, 0): ,
+#             (0, 0, 1): ,
+#             (1, 1, 0): ,
+#             (1, 0, 1): ,
+#             (0, 1, 1): ,
+#             (1, 1, 1): 
+#                 }
+    # Initialize the stats dictionary
+    stats_dict = {}
+    stats_dict["n_images"] = len(results_dic)
+    stats_dict["n_dog_img"] = 0
+    stats_dict["n_match"] = 0
+    stats_dict["n_correct_dogs"] = 0
+    stats_dict["n_correct_breed"] = 0
+    for v in results_dic.values():
+        if v[2] == 1 and v[3] == 1:
+                stats_dict["n_match"] += 1
+                stats_dict["n_dog_img"] += 1
+                stats_dict["n_correct_dogs"] = 0
+                stats_dict["n_correct_breed"] += 1
+        elif v[2] == 1:
+                stats_dict["n_match"] += 1
+        else:
+                stats_dict["n_correct_dogs"] = 0
+                stats_dict["n_dog_img"] += 1  
+        # if refactoring is needed
+        # func_dict.get((v[2], v[3], v[4]))
+            
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
-    return None
+    return stats_dict

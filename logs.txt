@@ -3,3 +3,9 @@ Finished until part 10 of the project:
 - Added a way to time the program
 - Added the necessary code to allow arguments to be passed from the cli
 - Added a code to get the pet labels
+
+08/11/2022
+Part 16 not yet finished:
+- Added a way to classify the images
+- Added a way to check if the image is a dog or not
+- Calculate stats still not finished might have to redo if statements
