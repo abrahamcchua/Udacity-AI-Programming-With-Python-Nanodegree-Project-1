@@ -9,3 +9,10 @@ Part 16 not yet finished:
 - Added a way to classify the images
 - Added a way to check if the image is a dog or not
 - Calculate stats still not finished might have to redo if statements
+
+08/13/2022
+Finished everything:
+- Added a way to print the resulting statistics
+- Finished uploading the four images as well as processing it
+- The check_images.py was used on the uploaded images
+- Answered the questions in check_images.txt

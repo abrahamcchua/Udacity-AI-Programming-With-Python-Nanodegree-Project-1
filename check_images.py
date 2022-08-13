@@ -110,14 +110,14 @@ def main():
     #      print_results(results, results_stats, in_arg.arch, True, True)
     # Prints summary results, incorrect classifications of dogs (if requested)
     # and incorrectly classified breeds (if requested)
-    print_results(results, results_stats, None, True, True)
+    print_results(results, results_stats, in_arg.arch, True, True)
     
     # TODO 0: Measure total program runtime by collecting end time
     end_time = time()
     
     # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
     #calculate difference between end time and start time
-    tot_time = start_time - end_time
+    tot_time = end_time - start_time
     print("\n** Total Elapsed Runtime:",
           str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
           +str(int((tot_time%3600)%60)) )

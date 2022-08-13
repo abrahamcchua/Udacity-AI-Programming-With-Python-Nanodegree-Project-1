@@ -68,38 +68,34 @@ def calculates_results_stats(results_dic):
                      and the previous topic Calculating Results in the class for details
                      on how to calculate the counts and statistics.
     """
-    # For refactoring
-#     func_dict = {
-#             (0, 0, 0): ,
-#             (1, 0, 0): ,
-#             (0, 1, 0): ,
-#             (0, 0, 1): ,
-#             (1, 1, 0): ,
-#             (1, 0, 1): ,
-#             (0, 1, 1): ,
-#             (1, 1, 1): 
-#                 }
     # Initialize the stats dictionary
     stats_dict = {}
     stats_dict["n_images"] = len(results_dic)
-    stats_dict["n_dog_img"] = 0
+    stats_dict["n_dogs_img"] = 0
     stats_dict["n_match"] = 0
+    stats_dict["n_correct_not_dogs"] = 0
     stats_dict["n_correct_dogs"] = 0
     stats_dict["n_correct_breed"] = 0
     for v in results_dic.values():
+        if v[3] == 1 and v[4] == 1:
+            stats_dict["n_correct_dogs"] += 1
+        elif v[3] == 0 and v[4] == 0:
+            stats_dict["n_correct_not_dogs"] += 1   
+        if v[3] == 1:
+            stats_dict["n_dogs_img"] += 1
+        if v[2]:
+            stats_dict["n_match"] += 1
         if v[2] == 1 and v[3] == 1:
-                stats_dict["n_match"] += 1
-                stats_dict["n_dog_img"] += 1
-                stats_dict["n_correct_dogs"] = 0
-                stats_dict["n_correct_breed"] += 1
-        elif v[2] == 1:
-                stats_dict["n_match"] += 1
-        else:
-                stats_dict["n_correct_dogs"] = 0
-                stats_dict["n_dog_img"] += 1  
-        # if refactoring is needed
-        # func_dict.get((v[2], v[3], v[4]))
-            
+            stats_dict["n_correct_breed"] += 1
+    stats_dict["n_notdogs_img"] = stats_dict["n_images"] - stats_dict["n_dogs_img"]
+    stats_dict["pct_match"] = round(stats_dict["n_match"]/stats_dict["n_images"] * 100, 1)
+    stats_dict["pct_correct_dogs"] = round(stats_dict["n_dogs_img"]/stats_dict["n_correct_dogs"] * 100, 1)
+    stats_dict["pct_correct_breed"] = round(stats_dict["n_correct_breed"]/stats_dict["n_dogs_img"] * 100, 1)
+    if stats_dict["n_notdogs_img"] > 0:
+        stats_dict["pct_correct_notdogs"] = round(stats_dict["n_correct_not_dogs"]/stats_dict["n_notdogs_img"] * 100, 1)
+    else:
+        stats_dict["pct_correct_notdogs"] = 0
+    
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
     return stats_dict

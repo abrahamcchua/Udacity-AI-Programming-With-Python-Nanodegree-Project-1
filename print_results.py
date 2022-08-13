@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/print_results.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:
+# PROGRAMMER: Abraham Chua
+# DATE CREATED: 08/12/2022
 # REVISED DATE: 
 # PURPOSE: Create a function print_results that prints the results statistics
 #          from the results statistics dictionary (results_stats_dic). It 
@@ -61,6 +61,36 @@ def print_results(results_dic, results_stats_dic, model,
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
-    None
-                
+    """
+    # Print the type of pretrained model used in this classification
+    print("The model used for this classification is {}".format(model))
+    # Formatting
+    print("")
+    print("Result statistics of the classification")
+    # Print the corresponding values inside the result statistics dictionary
+    for k, v in results_stats_dic.items():
+        if k[0] == "p":
+            print("% {} has the value of {}".format(k[4:].replace("_", " "), v))
+        else:
+            print("number of {} is {}".format(k[2:].replace("_", " "), v))
+    
+         
+    # Check if the user wants to check for incorrectly classified images and if there any misclassified images. 
+    # The second statement was added to remove unnecessary runtime for code block to check everything if there are no misclassified images
+    if print_incorrect_dogs and (results_stats_dic["pct_correct_dogs"] < 100 or results_stats_dic["pct_correct_notdogs"] < 100):
+        # Formatting
+        print("") 
+        print("Misclassified images")
+        for k, v in results_dic.items():
+            # Check the values if it's misclassified
+            if v[3] != v[4]:
+                print("The image {} has been misclassified".format(k))
+    # Check if the user wants to check for incorrectly classified dog breeds and if there are any.
+    if print_incorrect_breed and results_stats_dic["pct_correct_breed"] < 100:
+        # Formatting
+        print("") 
+        print("Misclassified dog breeds")
+        for k, v in results_dic.items():
+            if sum(v[3:]) == 2 and v[2] == 0:
+                # print(results_dic[k])
+                print("The breed of the dog in the image {} has been misclassified".format(k))
